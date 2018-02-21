@@ -9,10 +9,18 @@ $config = new Configuration();
 $config->setAuthConfigFile("webhook-b14b4-firebase-adminsdk-fcj9f-1f5d795eea.json");
 $fb = new Firebase('https://webhook-b14b4.firebaseio.com/', $config);
 
+
 $hit = ["time"=>time()];
-array_push($hit, $_GET);
-array_push($hit, file_get_contents("php://input"));
+array_merge($hit, $_GET);
+
+$content = file_get_contents("php://input");
+var_dump($content);
+if($content){
+	$content = json_decode($content, TRUE);
+	$hit = array_merge($hit, $content);
+}
 $fb->push($hit, 'hit/');
+
 if(isset($_GET["hub_challenge"]))
 	echo $_GET["hub_challenge"];
 ?>
