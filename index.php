@@ -11,7 +11,7 @@ $fb = new Firebase('https://webhook-b14b4.firebaseio.com/', $config);
 
 $hit = ["time"=>time()];
 array_push($hit, $_GET);
-array_push($hit, $_POST);
+array_push($hit, $_POST['object']);
 $fb->push($hit, 'hit/');
 if(isset($_GET["hub_challenge"]))
 	echo $_GET["hub_challenge"];
