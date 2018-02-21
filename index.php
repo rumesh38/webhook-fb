@@ -14,7 +14,6 @@ $hit = ["time"=>time()];
 array_merge($hit, $_GET);
 
 $content = file_get_contents("php://input");
-var_dump($content);
 if($content){
 	$content = json_decode($content, TRUE);
 	$hit = array_merge($hit, $content);
